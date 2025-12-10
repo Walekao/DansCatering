@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HeroSection } from "@/components/HeroSection";
 import { ImpactSection } from "@/components/ImpactSection";
 import { AvailabilityCalendar } from "@/components/AvailabilityCalendar";
@@ -8,11 +8,38 @@ import { MenuSection } from "@/components/MenuSection";
 import { TestimonialsSection } from "@/components/TestimonialsSection";
 import { FAQSection } from "@/components/FAQSection";
 import { InquiryForm } from "@/components/InquiryForm";
+import { PinProtection } from "@/components/PinProtection";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 
 export default function Home() {
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [isChecking, setIsChecking] = useState(true);
   const [showAvailability, setShowAvailability] = useState(false);
   const [showMenus, setShowMenus] = useState(false);
+
+  useEffect(() => {
+    // Check if user has PIN access cookie
+    const checkAccess = async () => {
+      try {
+        const response = await fetch("/api/auth/check", {
+          credentials: "include",
+        });
+        if (response.ok) {
+          setIsUnlocked(true);
+        }
+      } catch (error) {
+        console.error("Error checking access:", error);
+      } finally {
+        setIsChecking(false);
+      }
+    };
+
+    checkAccess();
+  }, []);
+
+  const handleUnlock = () => {
+    setIsUnlocked(true);
+  };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -20,6 +47,34 @@ export default function Home() {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
+  // Show loading state while checking access
+  if (isChecking) {
+    return (
+      <main className="min-h-screen flex items-center justify-center bg-sage-50">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-terracotta-600 mx-auto"></div>
+          <p className="mt-4 text-sage-700">Loading...</p>
+        </div>
+      </main>
+    );
+  }
+
+  // Show PIN protection if not unlocked
+  if (!isUnlocked) {
+    return (
+      <main className="min-h-screen bg-sage-50">
+        <PinProtection onUnlock={handleUnlock} />
+        {/* Blurred background content */}
+        <div className="blur-sm pointer-events-none">
+          <HeroSection
+            onCheckAvailability={() => {}}
+            onViewMenus={() => {}}
+          />
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen">
