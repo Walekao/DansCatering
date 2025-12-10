@@ -95,7 +95,7 @@ export function FAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="text-lg text-sage-700 max-w-2xl mx-auto">
-            Everything you need to know about booking with Dan's Legacy Catering
+            Everything you need to know about booking with Dan&apos;s Legacy Catering
           </p>
         </motion.div>
 

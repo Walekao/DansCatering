@@ -76,7 +76,7 @@ export function TestimonialsSection() {
             Trusted by Community Leaders
           </h2>
           <p className="text-lg text-sage-700 max-w-2xl mx-auto">
-            See what our partners say about working with Dan's Legacy Catering
+            See what our partners say about working with Dan&apos;s Legacy Catering
           </p>
         </motion.div>
 
@@ -110,7 +110,7 @@ export function TestimonialsSection() {
                     </div>
                   </div>
                   <p className="text-sage-700 mb-4 leading-relaxed italic">
-                    "{testimonial.content}"
+                    &ldquo;{testimonial.content}&rdquo;
                   </p>
                   <div className="border-t border-sage-100 pt-4">
                     <p className="font-semibold text-sage-900">

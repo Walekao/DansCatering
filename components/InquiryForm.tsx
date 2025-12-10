@@ -109,7 +109,7 @@ export function InquiryForm() {
                 Request a Quote
               </CardTitle>
               <CardDescription className="text-base">
-                Let's discuss how we can make your event special while supporting
+                Let&apos;s discuss how we can make your event special while supporting
                 our mission
               </CardDescription>
             </CardHeader>
@@ -228,7 +228,7 @@ export function InquiryForm() {
                       <AlertCircle className="h-4 w-4 text-yellow-600 mt-0.5 flex-shrink-0" />
                       <p className="text-sm text-yellow-800">
                         Note: Priority booking is given to non-profit partners.
-                        We'll do our best to accommodate your request!
+                        We&apos;ll do our best to accommodate your request!
                       </p>
                     </motion.div>
                   )}
