@@ -56,7 +56,7 @@ const testimonials = [
     organization: "Senior Services Association",
     role: "Event Planner",
     content:
-      "Our seniors loved the food, and we loved the mission. The halal and vegetarian options meant everyone could enjoy the meal together. It's rare to find this level of quality at non-profit rates.",
+      "Our seniors loved the food, and we loved the mission. The halal and vegetarian options meant everyone could enjoy the meal together. It&apos;s rare to find this level of quality at non-profit rates.",
     rating: 5,
   },
 ];

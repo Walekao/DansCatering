@@ -45,7 +45,7 @@ const faqs: FAQItem[] = [
   {
     question: "What is the minimum order size?",
     answer:
-      "We typically require a minimum of 20 guests to make an event viable. However, we understand that smaller community gatherings are important too. Contact us directly if you have a smaller group, and we'll see if we can accommodate you.",
+      "We typically require a minimum of 20 guests to make an event viable. However, we understand that smaller community gatherings are important too. Contact us directly if you have a smaller group, and we&apos;ll see if we can accommodate you.",
   },
   {
     question: "How do you handle payment?",
