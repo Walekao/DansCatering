@@ -59,7 +59,7 @@ export function InquiryForm() {
       // Success
       setSubmitStatus({
         type: "success",
-        message: data.message || "Thank you! We&apos;ll get back to you soon.",
+        message: data.message || "Thank you! We'll get back to you soon.",
       });
 
       // Reset form
