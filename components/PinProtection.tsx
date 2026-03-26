@@ -18,31 +18,27 @@ export function PinProtection({ onUnlock }: { onUnlock: () => void }) {
     setIsSubmitting(true);
     setError("");
 
-    try {
-      const response = await fetch("/api/auth/pin", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ pin }),
-      });
+    // Client-side PIN validation (PIN: 4497)
+    const CORRECT_PIN = "4497";
+    
+    // Simulate API delay
+    await new Promise(resolve => setTimeout(resolve, 500));
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Invalid PIN code");
-      }
-
-      // Success - unlock the page
-      onUnlock();
-    } catch (error) {
-      setError(
-        error instanceof Error ? error.message : "Invalid PIN code. Please try again."
-      );
+    if (pin !== CORRECT_PIN) {
+      setError("Invalid PIN code. Please try again.");
       setPin("");
-    } finally {
       setIsSubmitting(false);
+      return;
     }
+
+    // Store access in sessionStorage (24 hours)
+    const expiresAt = new Date().getTime() + (24 * 60 * 60 * 1000);
+    sessionStorage.setItem('pin_access', 'granted');
+    sessionStorage.setItem('pin_access_expires', expiresAt.toString());
+
+    // Success - unlock the page
+    onUnlock();
+    setIsSubmitting(false);
   };
 
   return (

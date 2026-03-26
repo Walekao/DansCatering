@@ -18,20 +18,22 @@ export default function Home() {
   const [showMenus, setShowMenus] = useState(false);
 
   useEffect(() => {
-    // Check if user has PIN access cookie
-    const checkAccess = async () => {
-      try {
-        const response = await fetch("/api/auth/check", {
-          credentials: "include",
-        });
-        if (response.ok) {
+    // Check if user has PIN access in sessionStorage
+    const checkAccess = () => {
+      const pinAccess = sessionStorage.getItem('pin_access');
+      const expiresAt = sessionStorage.getItem('pin_access_expires');
+      
+      if (pinAccess === 'granted' && expiresAt) {
+        const now = new Date().getTime();
+        if (now < parseInt(expiresAt)) {
           setIsUnlocked(true);
+        } else {
+          // Expired, clear it
+          sessionStorage.removeItem('pin_access');
+          sessionStorage.removeItem('pin_access_expires');
         }
-      } catch (error) {
-        console.error("Error checking access:", error);
-      } finally {
-        setIsChecking(false);
       }
+      setIsChecking(false);
     };
 
     checkAccess();
